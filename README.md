@@ -4,7 +4,7 @@ This is an open source project from [DevProjects](http://www.codementor.io/proje
 Find the project requirements here: [RSS feed reader website](https://www.codementor.io/projects/web/rss-feed-reader-website-atx32j280x)
 
 ## Tech/framework used
-Built with ___
+Built with Flask
 
 ## Screenshots and demo
 Screenshots of your app and/or a link to your live demo
