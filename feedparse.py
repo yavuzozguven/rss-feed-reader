@@ -1,11 +1,12 @@
 import feedparser
 from rssitem import RssItem
+import random
 
 class FeedParse:
-    def __init__(self,url) -> None:
+    def __init__(self,url):
         self.url = url
 
-    def get_feed(self):
+    def get_channelInfo(self):
         feed = {}
         response = self.get_response()
         feed['title'] = self.get_title(response)
@@ -13,19 +14,24 @@ class FeedParse:
         feed['link'] = self.get_link(response)
         feed['pubDate'] = self.get_pubDate(response)
         feed['imageUrl'] = self.get_imageUrl(response)
-        feed['items'] = []
+        return feed
+
+    def get_feed(self):
+        response = self.get_response()
+        feed = []
         for item in self.get_items(response):
+            random_number = random.randint(0,150000)
             RssItem = {}
             RssItem['title'] = self.get_item_title(item)
             RssItem['description'] = self.get_item_description(item)
             RssItem['link'] = self.get_item_link(item)
             RssItem['pubDate'] = self.get_item_pubDate(item)
-            RssItem['imageUrl'] = self.get_item_imageUrl(item)
+            RssItem['imageUrl'] = self.get_item_imageUrl(item) if self.get_item_imageUrl(item) is not None else "https://source.unsplash.com/random/200x200?sig={random_number}".format(random_number=random_number)
             RssItem['guid'] = self.get_item_guid(item)
             RssItem['author'] = self.get_item_author(item)
             RssItem['category'] = self.get_item_category(item)
             RssItem['comments'] = self.get_item_comments(item)
-            feed['items'].append(RssItem)
+            feed.append(RssItem)
         return feed        
 
     def get_response(self):

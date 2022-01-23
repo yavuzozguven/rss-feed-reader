@@ -8,52 +8,35 @@
     <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="static/css/styles.css">
-    <link rel="stylesheet" href="static/css/Team-Grid.css">
+    <link rel="stylesheet" href="static/css/Card-Grid.css">
 </head>
 
 <body>
-    <section class="team-grid">
+    <section class="card-grid">
         <div class="container">
             <div class="intro">
-                <h2 class="text-center">Team </h2>
-                <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet.&nbsp; </p>
+                <h2 class="text-center">Rss Feed Reader</h2>
+                <p class="text-center">Most news websites, blogs, podcasts, maintain a RSS feed which gives real-time content updates.</p>
             </div>
-            <div class="input-group" style="margin-top: 20px;margin-bottom: 20px;"><input class="form-control" type="url"><button class="btn btn-primary" type="button">Button</button></div>
+            <form id="form" method="post" action="/"><div class="input-group" style="margin-top: 20px;margin-bottom: 20px;"><input class="form-control" name="url"><button class="btn btn-primary" type="submit">Add Url</button></div></form>
+            {% if channelInfo %}
+            <div class="intro">
+                <h2 class="text-center">{{channelInfo['title']}}</h2>
+                <p class="text-center">{{channelInfo['description']}}</p>
+            </div>
+            {% endif %}
             <div class="row row-cols-3 font-monospace text-lowercase people" data-aos="fade" data-aos-once="true">
-                {% for val in feed %}
+                {% for feed in feeds %}
                 <div class="col" style="margin-top: 30px;">
-                    <div class="card"><img class="card-img-top w-100 d-block">
+                    <div class="card"><img class="card-img-top w-100 d-block" src="{{feed['imageUrl']}}">
                         <div class="card-body">
-                            <h4 class="card-title">{{val.title}}</h4>
-                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><button class="btn btn-primary" type="button">Button</button>
+                            <h4 class="card-title">{{feed['title']}}</h4>
+                            <p class="card-text">{{feed['description']}}</p>
+                            <a href="{{feed['link']}}" class="btn btn-primary">Read More &rarr;</a>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-                <div class="col" style="margin-top: 30px;">
-                    <div class="card"><img class="card-img-top w-100 d-block">
-                        <div class="card-body">
-                            <h4 class="card-title">{feed['items'][0]}</h4>
-                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><button class="btn btn-primary" type="button">Button</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" style="margin-top: 30px;">
-                    <div class="card"><img class="card-img-top w-100 d-block">
-                        <div class="card-body">
-                            <h4 class="card-title">Title</h4>
-                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><button class="btn btn-primary" type="button">Button</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" style="margin-top: 30px;">
-                    <div class="card"><img class="card-img-top w-100 d-block">
-                        <div class="card-body">
-                            <h4 class="card-title">Title</h4>
-                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><button class="btn btn-primary" type="button">Button</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
